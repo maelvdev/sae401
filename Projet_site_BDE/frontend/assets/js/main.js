@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost/backend';
+const API_URL = 'http://localhost:8000';
 
 // Fonction pour charger le contenu dynamiquement
 async function loadContent(path) {
