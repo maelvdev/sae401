@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}BDE IUT Info{% endblock %}</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>BDE IUT Info</h1>
+            <ul>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/events">Événements</a></li>
+                <li><a href="/shop">Boutique</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; {{ "now"|date("Y") }} BDE IUT Info</p>
+    </footer>
+</body>
+</html>
