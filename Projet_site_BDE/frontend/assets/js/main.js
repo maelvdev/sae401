@@ -4,7 +4,15 @@ const API_URL = 'http://localhost:8000';
 async function loadContent(path) {
     try {
         console.log(`Tentative de chargement: ${API_URL}${path}`);
-        const response = await fetch(`${API_URL}${path}`);
+        const response = await fetch(`${API_URL}${path}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors',
+            credentials: 'include'
+        });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -65,6 +73,12 @@ function handleRoute() {
                                     <h3>${product.nom}</h3>
                                     <p>${product.description}</p>
                                     <p>Prix: ${product.prix}€</p>
+                                    ${Array.isArray(product.taille) ? `
+                                        <p>Tailles disponibles: ${product.taille.join(', ')}</p>
+                                    ` : ''}
+                                    ${Array.isArray(product.couleurs) ? `
+                                        <p>Couleurs: ${product.couleurs.join(', ')}</p>
+                                    ` : ''}
                                     <button onclick="showOrderForm(${product.id})">Commander</button>
                                 </div>
                             `).join('')}
