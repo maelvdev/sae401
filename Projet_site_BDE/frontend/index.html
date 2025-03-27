@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="<?php echo generateCSRFToken(); ?>">
+    <title>BDE IUT - Accueil</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>BDE IUT</h1>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#evenements">Événements</a></li>
+                <li><a href="#boutique">Boutique</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="app">
+        <!-- Le contenu dynamique sera injecté ici -->
+        <div id="forms" style="display: none;">
+            <!-- Formulaire de connexion -->
+            <form id="loginForm" class="form">
+                <h2>Connexion</h2>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="motDePasse" placeholder="Mot de passe" required>
+                <button type="submit">Se connecter</button>
+            </form>
+
+            <!-- Formulaire de commande -->
+            <form id="orderForm" class="form">
+                <h2>Commander un produit</h2>
+                <select name="produit" required>
+                    <!-- Rempli dynamiquement -->
+                </select>
+                <input type="number" name="quantite" min="1" placeholder="Quantité" required>
+                <select name="taille" required>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                </select>
+                <button type="submit">Commander</button>
+            </form>
+
+            <!-- Formulaire de contact -->
+            <form id="contactForm" class="form">
+                <h2>Contact</h2>
+                <input type="text" name="nom" placeholder="Nom" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <textarea name="message" placeholder="Message" required></textarea>
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 BDE IUT. Tous droits réservés.</p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
