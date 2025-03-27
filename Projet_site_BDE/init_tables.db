@@ -60,3 +60,18 @@ CREATE TABLE Passer (
    FOREIGN KEY(idUtilisateur) REFERENCES UTILISATEUR(id),
    FOREIGN KEY(idCommande) REFERENCES COMMANDE(id)
 );
+
+CREATE TABLE QuestionsFrequentes (
+   idQuestion INT,
+   question   VARCHAR(50 ) NOT NULL,
+   reponse    VARCHAR(200) NOT NULL,
+   PRIMARY KEY(idQuestion)
+);
+
+CREATE TABLE Contact (
+    idContact INT,
+    nom        VARCHAR(40)  NOT NULL
+    prenom    VARCHAR(30)  NOT NULL,
+    mail    VARCHAR(50 ) NOT NULL,
+    demande VARCHAR(200) NOT NULL
+):
