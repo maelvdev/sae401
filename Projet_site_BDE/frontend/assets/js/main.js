@@ -3,11 +3,20 @@ const API_URL = 'http://localhost:8000';
 // Fonction pour charger le contenu dynamiquement
 async function loadContent(path) {
     try {
+        console.log(`Tentative de chargement: ${API_URL}${path}`);
         const response = await fetch(`${API_URL}${path}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
+        console.log('Données reçues:', data);
         return data;
     } catch (error) {
-        console.error('Erreur:', error);
+        console.error('Erreur détaillée:', error);
+        document.getElementById('app').innerHTML = `
+            <div class="error-message">
+                Erreur de chargement: ${error.message}
+            </div>`;
         return null;
     }
 }
@@ -15,6 +24,7 @@ async function loadContent(path) {
 // Gestionnaire de routes simple
 function handleRoute() {
     const hash = window.location.hash || '#accueil';
+    console.log('Route actuelle:', hash);
     const app = document.getElementById('app');
     const forms = document.getElementById('forms');
     
@@ -110,8 +120,9 @@ async function sendSecureRequest(url, formData) {
 
 // Gestionnaire de formulaires
 function handleForms() {
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
         e.preventDefault();
+        console.log('Tentative de connexion...');
         try {
             const formData = new FormData(e.target);
             const data = await sendSecureRequest(`${API_URL}/api/login`, formData);
@@ -127,8 +138,9 @@ function handleForms() {
         }
     });
 
-    document.getElementById('orderForm').addEventListener('submit', async (e) => {
+    document.getElementById('orderForm')?.addEventListener('submit', async (e) => {
         e.preventDefault();
+        console.log('Tentative de commande...');
         const formData = new FormData(e.target);
         try {
             const data = await sendSecureRequest(`${API_URL}/api/commande`, formData);

@@ -7,8 +7,31 @@ header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
 
-require_once './config/database.php';
+require_once __DIR__ . '/config/database.php';
 require_once './includes/functions.php';
+
+// Route pour tester l'API
+if ($_SERVER['REQUEST_URI'] === '/test_api.php' || $_SERVER['REQUEST_URI'] === '/test_api') {
+    try {
+        if ($pdo) {
+            $stmt = $pdo->query('SELECT CURRENT_TIMESTAMP');
+            $time = $stmt->fetch(PDO::FETCH_COLUMN);
+            
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'API opérationnelle',
+                'timestamp' => $time,
+                'database' => 'connectée'
+            ]);
+        }
+    } catch (PDOException $e) {
+        echo json_encode([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ]);
+    }
+    exit;
+}
 
 $request = $_SERVER['REQUEST_URI'];
 $method = $_SERVER['REQUEST_METHOD'];
